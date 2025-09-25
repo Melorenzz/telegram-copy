@@ -1,0 +1,36 @@
+@import 'tailwindcss';
+:root {
+    --main-bg-gray: #212121;
+    --secondary-bg-gray: #0f0f0f;
+    --border-gray: #303030;
+    --text-gray: #ababab;
+    --text: #FFF;
+    --violet-col: #766ac8;
+    --hover-col: rgba(255, 255, 255, 0.05);
+}
+[data-theme="light"] {
+    --main-bg-gray: #f9f9f9;        /* основной фон — почти белый, мягкий для глаз */
+    --secondary-bg-gray: #ffffff;   /* карточки и панели — чистый белый */
+    --border-gray: #e0e0e0;         /* светло-серые границы */
+    --text-gray: #6b7280;           /* второстепенный текст — средне-серый */
+    --text: #111827;                /* основной текст — почти чёрный, контрастный */
+    --violet-col: #6366f1;          /* фиолетовый для акцентов, умеренный */
+    --hover-col: rgba(0, 0, 0, 0.05); /* лёгкий hover на светлом фоне */
+}
+
+
+@theme {
+    --color-bg-main: var(--main-bg-gray);
+    --color-bg-secondary: var(--secondary-bg-gray);
+    --color-border: var(--border-gray);
+    --color-text: var(--text);
+    --color-text-secondary: var(--text-gray);
+    --color-violet-col: var(--violet-col);
+    --color-hover-col: var(--hover-col);
+}
+body{
+    color: var(--text);
+}
+button, a{
+    cursor: pointer;
+}
