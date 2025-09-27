@@ -1,5 +1,5 @@
 import {apiRequest} from "./api/https.ts";
-import {login, register} from "../config/api.config.ts";
+import {getMe, getUserData, login, register} from "../config/api.config.ts";
 export interface RegisterDto {
     email: string;
     password: string;
@@ -20,5 +20,17 @@ export const ProfileService = {
         apiRequest(login(), {
             method: "POST",
             body: JSON.stringify(data),
+        }),
+    getUserData: (username: string) =>
+        apiRequest(getUserData(username), {
+            method: "GET",
+
+        }),
+    getMe: () =>
+        apiRequest(getMe(), {
+            method: "GET",
+            headers: {
+                'Authorization': `Bearer ${localStorage.getItem("auth-token")}`,
+            }
         }),
 };

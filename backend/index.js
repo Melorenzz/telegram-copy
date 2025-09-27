@@ -102,4 +102,31 @@ app.get("/messages/:username", (req, res) => {
     }
 });
 
+// 🔹 Middleware для проверки токена
+function authMiddleware(req, res, next) {
+    const authHeader = req.headers.authorization;
+    if (!authHeader) return res.status(401).json({ error: "Нет токена" });
+
+    const token = authHeader.split(" ")[1];
+    if (!token) return res.status(401).json({ error: "Неверный токен" });
+
+    try {
+        const decoded = jwt.verify(token, JWT_SECRET);
+        req.userId = decoded.id; // сохраняем id пользователя
+        next();
+    } catch (err) {
+        return res.status(403).json({ error: "Токен недействителен" });
+    }
+}
+
+// 🔹 Эндпоинт /me
+app.get("/me", authMiddleware, (req, res) => {
+    const user = users.find(u => u.id === req.userId);
+    if (!user) return res.status(404).json({ error: "Пользователь не найден" });
+
+    const { passwordHash, ...userData } = user; // не возвращаем пароль
+    res.json(userData);
+});
+
+
 app.listen(5000, () => console.log("Server running on http://localhost:5000"));

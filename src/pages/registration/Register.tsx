@@ -2,6 +2,7 @@ import {useRegistration} from "./hooks/useRegistration.ts";
 import {useForm} from "react-hook-form";
 import { z } from "zod";
 import {zodResolver} from "@hookform/resolvers/zod";
+import {Link, useNavigate} from "react-router";
 const Register = () => {
     type RegisterForm = z.infer<typeof registerSchema>;
 
@@ -17,15 +18,17 @@ const Register = () => {
     const {register, handleSubmit, formState } = useForm<RegisterForm>({
         resolver: zodResolver(registerSchema)
     })
+    const navigate = useNavigate();
     const {errors} = formState;
     const onSubmit = (data: RegisterForm) => {
         mutate(data, {
-            onSuccess: (res) => console.log("Successfully registered", res),
+            onSuccess: (res) => {
+                console.log("Successfully registered", res);
+                navigate('/login');
+            },
             onError: (err) => console.log("Registration error", err),
         });
     };
-
-
     const inputs = [
         {name: 'email', placeholder: 'Email', type: 'email'},
         {name: 'username', placeholder: 'Username'},
@@ -60,6 +63,7 @@ const Register = () => {
                         </div>
                     ))}
                 </div>
+                <Link to='/login'>Login</Link>
                 <button
                     type="submit"
                     className="mt-2 py-2 px-4 rounded-lg bg-violet-500 text-white font-medium hover:bg-violet-600 transition"

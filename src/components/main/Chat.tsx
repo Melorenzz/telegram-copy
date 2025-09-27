@@ -1,4 +1,5 @@
 import type {OpenProfile} from "../../pages/main/types/type.ts";
+import {SendIcon} from "lucide-react";
 
 const Chat = ({setIsOpenProfile}: OpenProfile) => {
     return (
@@ -35,7 +36,7 @@ const Chat = ({setIsOpenProfile}: OpenProfile) => {
                     <div className='max-w-[300px] bg-bg-main rounded-full w-fit px-3 py-1.5'>tete2</div>
                     <div className='max-w-[300px] ml-auto  bg-violet-col rounded-full w-fit px-3 py-1.5'>tete2</div>
                     <div className='max-w-[300px] bg-bg-main rounded-full w-fit px-3 py-1.5'>tete2</div>
-                    <div className='max-w-[300px] ml-auto  bg-violet-col rounded-full w-fit px-3 py-1.5'>tete2</div>
+                    <div className='max-w-[300px] ml-auto bg-violet-col rounded-full w-fit px-3 py-1.5'>tete2</div>
                     <div className='max-w-[300px] bg-bg-main rounded-full w-fit px-3 py-1.5'>tete2</div>
                     <div className='max-w-[300px] ml-auto  bg-violet-col rounded-full w-fit px-3 py-1.5'>tete2</div>
                     <div className='max-w-[300px] bg-bg-main rounded-full w-fit px-3 py-1.5'>tete2</div>
@@ -67,8 +68,8 @@ const Chat = ({setIsOpenProfile}: OpenProfile) => {
                     placeholder="Type a message..."
                     className='h-full w-full rounded-2xl bg-bg-main  px-5 focus:outline-none '
                     type="text"/>
-                <button className='min-w-14 h-14 bg-bg-main rounded-full p-4.5'>
-                    d
+                <button className='min-w-14 h-14 bg-bg-main rounded-full p-4'>
+                    <SendIcon className='w-full h-full' />
                 </button>
             </div>
         </div>

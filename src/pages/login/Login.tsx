@@ -2,6 +2,7 @@ import {useForm} from "react-hook-form";
 import { z } from "zod";
 import {zodResolver} from "@hookform/resolvers/zod";
 import {useLogin} from "./hooks/useLogin.ts";
+import {Link, useNavigate} from "react-router";
 const Login = () => {
     type loginForm = z.infer<typeof loginSchema>;
 
@@ -14,10 +15,15 @@ const Login = () => {
     const {register, handleSubmit, formState } = useForm<loginForm>({
         resolver: zodResolver(loginSchema)
     })
+    const navigate = useNavigate();
     const {errors} = formState;
     const onSubmit = (data: loginForm) => {
         mutate(data, {
-            onSuccess: (res) => {console.log("Login success", res); localStorage.setItem('auth-token', res.token)},
+            onSuccess: (res) => {
+                console.log("Login success", res);
+                localStorage.setItem('auth-token', res.token);
+                navigate('/')
+            },
             onError: (err) => console.log("Login error", err),
         });
     };
@@ -52,6 +58,7 @@ const Login = () => {
                             )}
                         </div>
                     ))}
+                <Link to='/register'>Registration</Link>
                 <button
                     type="submit"
                     className="mt-2 py-2 px-4 rounded-lg bg-violet-500 text-white font-medium hover:bg-violet-600 transition"
